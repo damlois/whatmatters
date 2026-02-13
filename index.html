@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whatmatters.io — Simplicity, nature, love</title>
+  <link rel="stylesheet" href="css/whatmatters.css">
+</head>
+<body>
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">Whatmatters.io</a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="inspiration.html">Inspiration</a></li>
+        <li><a href="sayhi.html">Say Hi</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-video-wrap">
+      <video class="hero-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920">
+        <source src="videos/flower.mp4" type="video/mp4">
+      </video>
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <p class="quote">"The best things in life aren't things."</p>
+      <p class="quote-attribution">— Art Buchwald</p>
+    </div>
+  </header>
+
+  <section class="what-matters">
+    <h2 class="section-title">What matters</h2>
+    <ul class="matters-list">
+      <li>Family</li>
+      <li>Friends</li>
+      <li>People</li>
+      <li>Nature</li>
+      <li>Wellness</li>
+      <li>Love</li>
+      <li>Money</li>
+    </ul>
+  </section>
+
+  <section class="love-above">
+    <p class="lead-in">All of these matter—but</p>
+    <p class="line">Love is above all.</p>
+    <p class="sub">Overflow with grace, extend a hand of help, teach, inspire, forgive easily, give, sacrifice your desires sometimes.</p>
+    <p class="love-benefit">Love gives you peace, takes sicknesses away, heals you. You look more beautiful with love.</p>
+  </section>
+
+  <section class="love-passage">
+    <h2 class="section-title">What love looks like</h2>
+    <div class="passage-text">
+      <p>Love is patient and kind. It doesn't envy, brag, or seek its own. It isn't easily offended and never gives up.</p>
+    </div>
+  </section>
+
+  <section class="love-reflect">
+    <h2 class="section-title">A question for you</h2>
+    <p class="reflect-question">Love is a choice. <strong>How are you choosing love today?</strong></p>
+    <p class="reflect-ideas">It could be letting go of an offence. Buying a gift for that person who spoke negatively about you. Calling someone you haven't spoken to in a long time. Forgiving. Listening. Showing up. Show love today.</p>
+    <p class="scripture-line">Remember, Love never fails.</p>
+    <cite class="scripture-ref">— 1 Corinthians 13:8</cite>
+  </section>
+
+  <section class="valentine">
+    <span class="valentine-flower" aria-hidden="true">🌹</span>
+    <p class="valentine-text">Happy Valentine's Day</p>
+    <span class="valentine-flower" aria-hidden="true">🌹</span>
+  </section>
+
+  <section class="inspire">
+    <h2 class="section-title">Live in the moment</h2>
+    <p>Remind yourself to enjoy what you already have. Breathe. Look up. Put the phone down sometimes.</p>
+    <p>Gain knowledge. Help others. Love a little more. It doesn't have to be loud—it just has to be real.</p>
+  </section>
+
+  <section class="scripture">
+    <blockquote>Which of you by taking thought can add one cubit unto his stature?</blockquote>
+    <cite>— Matthew 6:27 (KJV)</cite>
+  </section>
+
+  <section class="goofy">
+    <p class="question">You love nature? 🌿</p>
+    <p class="answer">Same. Let's protect it. And maybe touch grass today.</p>
+    <p class="answer" style="margin-top: 1rem; font-size: 0.95rem;">Still scrolling? Go outside. We'll be here. ☀️</p>
+  </section>
+
+  <section class="video-section">
+    <h2 class="section-title">A moment of calm</h2>
+    <div class="video-wrapper">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/DxsRMpt1jhs?si=8Opt12jgXjdfwJEh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>    </div>
+    <p class="video-caption">Take a breath. You're allowed to pause.</p>
+  </section>
+
+  <section class="say-hi" id="sayhi">
+    <h2 class="section-title">Say Hi</h2>
+    <p class="subtitle">Let's connect.</p>
+    <div class="form-wrap">
+      <form action="#" method="get">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your name" required>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Say hello, share a thought, or tell us what matters to you… Do you have any questions about love?"></textarea>
+        <button type="submit">Let's connect</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>Whatmatters.io — a little reminder to focus on what matters.</p>
+    <p><a href="index.html">Home</a> · <a href="gallery.html">Gallery</a> · <a href="inspiration.html">Inspiration</a> · <a href="sayhi.html">Say Hi</a></p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var nav = document.getElementById('nav');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+      });
+    });
+  </script>
+</body>
+</html>

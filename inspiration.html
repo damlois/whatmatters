@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inspiration — Whatmatters.io</title>
+  <link rel="stylesheet" href="css/whatmatters.css">
+</head>
+<body>
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">Whatmatters.io</a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="inspiration.html">Inspiration</a></li>
+        <li><a href="sayhi.html">Say Hi</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="gallery-hero">
+    <a href="index.html" class="logo">Whatmatters.io</a>
+    <h1 class="section-title">Inspiration</h1>
+    <p style="color: var(--ink-soft); max-width: 520px; margin: 0 auto;">A verse and a nudge to live in the moment.</p>
+  </header>
+
+  <section class="scripture">
+    <blockquote>Which of you by taking thought can add one cubit unto his stature?</blockquote>
+    <cite>— Matthew 6:27 (KJV)</cite>
+    <p style="margin-top: 1.5rem; color: var(--ink-soft); font-size: 1rem;">Worry doesn't add a single hour—or cubit—to your life. So take a breath.</p>
+  </section>
+
+  <section class="love-above">
+    <p class="line">Love is above all.</p>
+    <p class="sub">Everything else - people, friends, nature, wellness—finds its place when we lead with love. So put love first. The rest follows.</p>
+    <p class="scripture-line">Love never fails.</p>
+    <cite class="scripture-ref">— 1 Corinthians 13:8</cite>
+  </section>
+
+  <section class="inspire">
+    <h2 class="section-title">Live in the moment</h2>
+    <p>Remind yourself to enjoy what you already have. Breathe. Look up. Put the phone down sometimes.</p>
+    <p>Gain knowledge. Help others. Love a little more. It doesn't have to be loud—it just has to be real.</p>
+  </section>
+
+  <footer>
+    <p><a href="index.html">← Back home</a></p>
+    <p>Whatmatters.io — a little reminder to focus on what matters.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var nav = document.getElementById('nav');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+      });
+    });
+  </script>
+</body>
+</html>

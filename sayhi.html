@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Say Hi — Whatmatters.io</title>
+  <link rel="stylesheet" href="css/whatmatters.css">
+</head>
+<body>
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">Whatmatters.io</a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="inspiration.html">Inspiration</a></li>
+        <li><a href="sayhi.html">Say Hi</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="say-hi" id="sayhi" style="padding-top: 6rem;">
+    <h2 class="section-title">Say Hi</h2>
+    <p class="subtitle">Let's connect.</p>
+    <div class="form-wrap">
+      <form action="#" method="get">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your name" required>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Say hello, share a thought, or tell us what matters to you..."></textarea>
+        <button type="submit">Let's connect</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p><a href="index.html">← Back home</a></p>
+    <p>Whatmatters.io — a little reminder to focus on what matters.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var nav = document.getElementById('nav');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+      });
+    });
+  </script>
+</body>
+</html>
