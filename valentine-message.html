@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Send a Valentine — Whatmatters.io</title>
+  <link rel="stylesheet" href="css/whatmatters.css">
+</head>
+<body>
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">Whatmatters.io</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="inspiration.html">Inspiration</a></li>
+        <li><a href="valentine-message.html">Send a Valentine</a></li>
+        <li><a href="sayhi.html">Say Hi</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="valentine-page">
+    <section class="valentine-hero">
+      <p class="valentine-hero-roses" aria-hidden="true">🌹 🌹 🌹</p>
+      <h1 class="valentine-hero-title">Send a Valentine</h1>
+      <p class="valentine-hero-sub">Share a little love. We'll deliver your message in a beautiful card.</p>
+    </section>
+
+    <section class="valentine-form-section">
+      <div class="valentine-form-grid">
+        <div class="valentine-form-col">
+          <div class="form-wrap">
+            <form id="valentine-form" action="#" method="get">
+              <label for="to_email">Recipient's email</label>
+              <input type="email" id="to_email" name="to_email" placeholder="their@email.com" required>
+
+              <label for="to_name">Their name</label>
+              <input type="text" id="to_name" name="to_name" placeholder="Who is this for?" required>
+
+              <label for="from_name">Your name</label>
+              <input type="text" id="from_name" name="from_name" placeholder="Your name" required>
+
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="A Valentine for you" value="A Valentine for you">
+
+              <fieldset class="message-type-fieldset">
+                <legend>Message</legend>
+                <label class="radio-label">
+                  <input type="radio" name="message_type" value="default" id="msg-default" checked>
+                  Use a default message
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="message_type" value="custom" id="msg-custom">
+                  Write my own
+                </label>
+              </fieldset>
+
+              <div class="valentine-custom-wrap" id="custom-message-wrap" hidden>
+                <label for="custom_message">Your message</label>
+                <textarea id="custom_message" name="custom_message" placeholder="Write something from the heart..." rows="5"></textarea>
+              </div>
+
+              <p class="valentine-send-preview" id="send-preview">
+                <strong>This is what will be sent:</strong><br>
+                To: <span id="preview-to">—</span><br>
+                Subject: <span id="preview-subject">A Valentine for you</span><br>
+                <span id="preview-body" class="valentine-preview-body"></span>
+              </p>
+
+              <div class="valentine-buttons">
+                <button type="button" id="btn-send-email" class="btn-send-email">Send by email</button>
+                <button type="button" id="btn-copy" class="btn-copy">Copy message</button>
+              </div>
+              <p id="emailjs-error" class="valentine-error" role="alert" aria-live="polite" hidden></p>
+            </form>
+          </div>
+        </div>
+
+        <div class="valentine-preview-col">
+          <h2 class="section-title">Preview</h2>
+          <p class="valentine-preview-note">This is how the email will look.</p>
+          <div class="valentine-card" id="valentine-card">
+            <div class="valentine-card-bar"></div>
+            <div class="valentine-card-roses" aria-hidden="true">🌹 &nbsp; 🌹 &nbsp; 🌹</div>
+            <div class="valentine-card-inner">
+              <p class="valentine-card-greeting" id="card-greeting">Happy Valentine's Day, —.</p>
+              <div class="valentine-card-message" id="card-message"></div>
+              <p class="valentine-card-signoff" id="card-signoff">With love, —.</p>
+              <p class="valentine-card-footer">Sent from <a href="https://whatmattersio.vercel.app/" style="color: #D32F2F; text-decoration: none;">Whatmatters.io</a></p>
+            </div>
+            <div class="valentine-card-roses valentine-card-roses-bottom" aria-hidden="true">🌹 &nbsp; 🌹 &nbsp; 🌹</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Back home</a></p>
+    <p>Whatmatters.io — a little reminder to focus on what matters.</p>
+  </footer>
+
+  <!-- PUT YOUR EMAILJS IDs HERE -->
+  <script>
+    window.EMAILJS_PUBLIC_KEY   = '';  // Account → API Keys (Public Key)
+    window.EMAILJS_SERVICE_ID  = '';  // Email Services → your service (e.g. service_xxxxx)
+    window.EMAILJS_TEMPLATE_ID = '';  // Email Templates → your template (e.g. template_xxxxx)
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    (function() {
+      var DEFAULT_MESSAGE = 'You matter. Today and every day, I want you to know how much you mean to me. Happy Valentine\'s Day.';
+      var DEFAULT_SUBJECT = 'A Valentine for you';
+
+      var form = document.getElementById('valentine-form');
+      var toEmail = document.getElementById('to_email');
+      var toName = document.getElementById('to_name');
+      var fromName = document.getElementById('from_name');
+      var subjectInput = document.getElementById('subject');
+      var msgDefault = document.getElementById('msg-default');
+      var msgCustom = document.getElementById('msg-custom');
+      var customWrap = document.getElementById('custom-message-wrap');
+      var customMessage = document.getElementById('custom_message');
+      var previewTo = document.getElementById('preview-to');
+      var previewSubject = document.getElementById('preview-subject');
+      var previewBody = document.getElementById('preview-body');
+      var cardGreeting = document.getElementById('card-greeting');
+      var cardMessage = document.getElementById('card-message');
+      var cardSignoff = document.getElementById('card-signoff');
+      var btnSendEmail = document.getElementById('btn-send-email');
+      var btnCopy = document.getElementById('btn-copy');
+      var emailjsErrorEl = document.getElementById('emailjs-error');
+
+      function useDefault() { return msgDefault && msgDefault.checked; }
+      function getMessage() { return useDefault() ? DEFAULT_MESSAGE : (customMessage.value.trim() || DEFAULT_MESSAGE); }
+      function getSubject() {
+        var s = subjectInput.value.trim();
+        return s || DEFAULT_SUBJECT;
+      }
+      function isSubjectDefaultLike(val) {
+        if (!val) return true;
+        return val === DEFAULT_SUBJECT || val.indexOf('A Valentine from ') === 0;
+      }
+      function updateSubjectFromSenderName() {
+        var name = fromName.value.trim();
+        if (!isSubjectDefaultLike(subjectInput.value)) return;
+        subjectInput.value = name ? 'A Valentine from ' + name : DEFAULT_SUBJECT;
+      }
+
+      function getFullBody() {
+        var to = toName.value.trim() || '—';
+        var from = fromName.value.trim() || '—';
+        var msg = getMessage();
+        return 'Happy Valentine\'s Day, ' + to + '.\n\n' + msg + '\n\nWith love, ' + from + '.';
+      }
+
+      function updatePreview() {
+        var to = toEmail.value.trim() || '—';
+        var toN = toName.value.trim() || '—';
+        var fromN = fromName.value.trim() || '—';
+        var subj = getSubject();
+        var msg = getMessage();
+        if (previewTo) previewTo.textContent = to;
+        if (previewSubject) previewSubject.textContent = subj;
+        if (previewBody) previewBody.textContent = getFullBody();
+        if (cardGreeting) cardGreeting.textContent = 'Happy Valentine\'s Day, ' + (toN || '—') + '.';
+        if (cardMessage) { cardMessage.textContent = msg; cardMessage.style.whiteSpace = 'pre-wrap'; }
+        if (cardSignoff) cardSignoff.textContent = 'With love, ' + (fromN || '—') + '.';
+      }
+
+      if (msgCustom && customWrap) {
+        msgCustom.addEventListener('change', function() { customWrap.hidden = !msgCustom.checked; updatePreview(); });
+        msgDefault.addEventListener('change', function() { customWrap.hidden = msgDefault.checked; updatePreview(); });
+      }
+      [toEmail, toName, fromName, subjectInput, customMessage].forEach(function(el) {
+        if (el) el.addEventListener('input', function() { updatePreview(); });
+      });
+      if (fromName) fromName.addEventListener('input', updateSubjectFromSenderName);
+
+      form.addEventListener('submit', function(e) { e.preventDefault(); });
+
+      var useEmailJS = window.EMAILJS_PUBLIC_KEY && window.EMAILJS_SERVICE_ID && window.EMAILJS_TEMPLATE_ID;
+      if (useEmailJS && typeof emailjs !== 'undefined') {
+        emailjs.init(window.EMAILJS_PUBLIC_KEY);
+      }
+
+      btnSendEmail.addEventListener('click', function() {
+        if (emailjsErrorEl) { emailjsErrorEl.hidden = true; emailjsErrorEl.textContent = ''; }
+        var to = toEmail.value.trim();
+        var toN = toName.value.trim();
+        var fromN = fromName.value.trim();
+        if (!to) { toEmail.focus(); return; }
+
+        var messageOnly = getMessage();
+        var messageBody = getFullBody();
+        var subj = getSubject();
+
+        if (useEmailJS && typeof emailjs !== 'undefined') {
+          btnSendEmail.disabled = true;
+          btnSendEmail.textContent = 'Sending…';
+          emailjs.send(window.EMAILJS_SERVICE_ID, window.EMAILJS_TEMPLATE_ID, {
+            to_email: to,
+            to_name: toN || '—',
+            from_name: fromN || '—',
+            message: messageOnly,
+            message_body: messageBody,
+            subject: subj
+          }).then(function() {
+            btnSendEmail.textContent = 'Sent!';
+            btnSendEmail.disabled = false;
+          }).catch(function(err) {
+            var msg = 'Request failed';
+            if (err) {
+              if (typeof err.text === 'string') msg = err.text;
+              else if (typeof err.message === 'string') msg = err.message;
+              else if (typeof err.statusText === 'string') msg = err.statusText;
+              else msg = String(err);
+            }
+            if (emailjsErrorEl && msg) {
+              emailjsErrorEl.textContent = 'Send failed: ' + msg;
+              emailjsErrorEl.hidden = false;
+            }
+            btnSendEmail.textContent = 'Send failed — try Copy';
+            btnSendEmail.disabled = false;
+          });
+        } else {
+          var mailto = 'mailto:' + encodeURIComponent(to) + '?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(messageBody);
+          window.location.href = mailto;
+        }
+      });
+
+      btnCopy.addEventListener('click', function() {
+        var body = getFullBody();
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(body).then(function() {
+            var t = btnCopy.textContent;
+            btnCopy.textContent = 'Copied!';
+            setTimeout(function() { btnCopy.textContent = t; }, 2000);
+          });
+        } else {
+          var ta = document.createElement('textarea');
+          ta.value = body;
+          ta.style.position = 'fixed'; ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          var t = btnCopy.textContent;
+          btnCopy.textContent = 'Copied!';
+          setTimeout(function() { btnCopy.textContent = t; }, 2000);
+        }
+      });
+
+      updatePreview();
+    })();
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var nav = document.getElementById('nav');
+      var toggle = document.getElementById('nav-toggle');
+      var menu = document.getElementById('nav-menu');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+      });
+      if (toggle && menu) {
+        toggle.addEventListener('click', function() {
+          var open = nav.classList.toggle('nav-open');
+          toggle.setAttribute('aria-expanded', open);
+          toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        });
+        menu.querySelectorAll('a').forEach(function(link) {
+          link.addEventListener('click', function() {
+            nav.classList.remove('nav-open');
+            toggle.setAttribute('aria-expanded', 'false');
+            toggle.setAttribute('aria-label', 'Open menu');
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>
