@@ -9,7 +9,13 @@
 <body>
   <nav id="nav">
     <div class="nav-inner">
-      <ul>
+      <a href="index.html" class="logo">Whatmatters.io</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-menu" id="nav-menu">
         <li><a href="index.html">Home</a></li>
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="inspiration.html">Inspiration</a></li>
@@ -77,10 +83,26 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       var nav = document.getElementById('nav');
+      var toggle = document.getElementById('nav-toggle');
+      var menu = document.getElementById('nav-menu');
       window.addEventListener('scroll', function() {
         if (window.scrollY > 50) nav.classList.add('scrolled');
         else nav.classList.remove('scrolled');
       });
+      if (toggle && menu) {
+        toggle.addEventListener('click', function() {
+          var open = nav.classList.toggle('nav-open');
+          toggle.setAttribute('aria-expanded', open);
+          toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        });
+        menu.querySelectorAll('a').forEach(function(link) {
+          link.addEventListener('click', function() {
+            nav.classList.remove('nav-open');
+            toggle.setAttribute('aria-expanded', 'false');
+            toggle.setAttribute('aria-label', 'Open menu');
+          });
+        });
+      }
     });
   </script>
 </body>
